@@ -1,0 +1,8 @@
+
+
+
+Django==2.1
+django-widgets-improved==1.5.0
+humanize==0.5.1
+Markdown==2.6.11
+Pillow==5.2.0

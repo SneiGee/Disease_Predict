@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+
+{% block title %}
+    {{ block.super }} - 
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Dashboard</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Symptom Checker
+          </div>
+
+          <div class="card-body">
+            <form id="searchform" action="{% url 'doctor_search' %}" method="GET">
+              <div class="input-group">
+                <input name="q" class="form-control py-2 border-right-0 border searchfield" type="search" placeholder="Search doctor..." id="searchbox" value="{{ request.GET.q }}">
+                <span class="input-group-append">
+                  <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+                </span>
+                <button type="submit">Search</button>
+                </div>
+            </form>
+            {% if doctor %}
+              {% for result in doctor %}
+                <div class="mb-1">
+                  <h3>
+                    <ul>
+                      <li>
+                        <a href="">
+                          <img src="{{ result.image.url }}" class="rounded-circle" style="min-width: 80px;max-height: 80px">
+                           {{ result.first_name }}  {{ result.last_name }}
+                        </a>
+                      </li>
+                    </ul>
+                  </h3>
+                </div>
+              {% endfor %}
+            {% else %}
+              <h5>
+                <ul>
+                  <LI>Sorry No Result Found!!!</LI>
+                </ul>
+              </h5>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+     var simplemde = new SimpleMDE();
+
+     $('body').highlight("{{query_string}}");
+  </script>
+
+{% endblock %}

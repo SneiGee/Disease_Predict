@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ block.super }} - 
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Dashboard</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Symptom Checker
+          </div>
+          <div class="card-body">
+            <form id="searchform" action="{% url 'search' %}" method="GET">
+			  <div class="input-group">
+	            <input name="q" class="form-control py-2 border-right-0 border searchfield" type="search" placeholder="Symptom" id="searchbox" value="{{ value.GET.q }}">
+	            <span class="input-group-append">
+	              <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+	            </span>
+	            <button type="submit">Search</button>
+		      </div>
+            </form>
+            <!--  End Search Form  -->
+            <br><hr>
+            <table class="table">
+	          <thead class="thead-dark">
+	            <tr>
+	              <th>Symptom</th>
+	              <th>Disease</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            {% for symptom in symptoms %}
+	              <tr>
+		            <td>
+		              <a class="text-dark" href="{% url 'eachdisease' symptom.pk %}">{{ symptom.name }}</a>
+		              <small class="text-muted d-block">{{ symptom.description }}</small>
+		            </td>
+		            <td class="align-middle">
+		            	{% if symptom.diseases.count %}
+		            	  {{ symptom.diseases.count }}
+		            	{% else %}
+		            	  <em>No symptoms yet</em>
+		            	{% endif %}
+		            </td>
+	              </tr>
+	            {% endfor %}
+	          </tbody>
+		    </table>
+		    <!-- End Table  -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+       $('#dashboard').addClass('active');
+    </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+<!-- {% load humanize %} -->
+
+
+{% block title %}
+    {{ block.super }} - {{ disease.name }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'eachdisease' disease.symptom.pk %}">{{ disease.symptom.name }}</a></li>
+  <li class="breadcrumb-item active">{{ disease.diease_name }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            {{ disease.symptom.name }} ({{ disease.disease_name }})
+          </div>
+          <div class="card-body">
+            {% for predict in diseasereport %}
+	          <h3 class="text-center">
+	            {{ disease.disease_name }}
+	          </h3>
+
+	            <div class="typography-line">
+                  <span>Report </span>
+                  <blockquote>
+                    <p class="blockquote blockquote-dark">
+                      "{{ predict.report }}"
+                      <br>
+                      <br>
+                      <small>
+                        - see doctor: <a href="">{{ predict.cure_doctor }}</a>
+                      </small>
+                    </p>
+                  </blockquote>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+       $('#dashboard').addClass('active');
+    </script>
+{% endblock %}

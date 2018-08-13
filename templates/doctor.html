@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+<!-- {% load humanize %} -->
+
+
+{% block title %}
+    {{ block.super }} - Doctors
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Doctors Details</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            All Doctor
+          </div>
+          <div class="card-body">
+            <form id="searchform" action="{% url 'doctor_search' %}" method="GET">
+			  <div class="input-group">
+	            <input name="q" class="form-control py-2 border-right-0 border searchfield" type="search" placeholder="Search doctor..." id="searchbox" value="{{ value.GET.q }}">
+	            <span class="input-group-append">
+	              <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+	            </span>
+	            <button type="submit">Search</button>
+		      </div>
+            </form>
+            <!--  End Search Form  -->
+            <br>
+            <br>
+            <hr>
+            <table class="table table-striped">
+	          <thead class="thead-dark">
+	            <tr>
+	              <th>Profile</th>
+	              <th>Doctor Name</th>
+	              <th>Position</th>
+	              <th>Phone</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            {% for doctor in doctors %}
+	              <tr>
+	              	<td>
+	              		<img src="{{ doctor.image.url }}" class="rounded-circle" style="min-width: 80px;max-height: 80px">
+	              	</td>
+		            <td>
+		              <a class="text-dark" href="">
+		                 {{ doctor.first_name }} {{ doctor.last_name }}
+		              </a>
+		            </td>
+			        <td>{{ doctor.position }}</td>
+			        <td>{{ doctor.phone }}</td>
+	              </tr>
+	            {% endfor %}
+	          </tbody>
+		    </table>
+		    <!-- End Table  -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
