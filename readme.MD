@@ -23,3 +23,5 @@ virtualenv venv
 
 ```bash
 pip install -r requirements.txt
+
+localhost:8080
