@@ -1,9 +1,10 @@
 
-FOLLOW THIS INSTRUCTIONS TO INSTALL 
+# FOLLOW THIS INSTRUCTIONS TO INSTALL 
 
-Install the requirements:
+## Install the requirements:
 
-we're running everything in our virtual environment 
+we're running everything in our virtual environment so you need to install venv in your project directory!
+
 
 so make sure you've python 3 install on your machine
 
